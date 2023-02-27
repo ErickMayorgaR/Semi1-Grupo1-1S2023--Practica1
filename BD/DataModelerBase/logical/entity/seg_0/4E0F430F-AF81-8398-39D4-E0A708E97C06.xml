@@ -1,0 +1,73 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="4E0F430F-AF81-8398-39D4-E0A708E97C06" name="Album">
+<createdBy>Mario</createdBy>
+<createdTime>2023-02-27 22:12:00 UTC</createdTime>
+<ownerDesignName>DataModelerBase</ownerDesignName>
+<engineerTo>
+<item key="5D1CFFD0-B6F1-D690-C36F-F64C0843FB00" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id_album" id="8E20FBF1-2638-B944-A6DA-9FFF66F02EBF">
+<createdBy>Mario</createdBy>
+<createdTime>2023-02-27 22:12:07 UTC</createdTime>
+<ownerDesignName>DataModelerBase</ownerDesignName>
+<engineerTo>
+<item key="5D1CFFD0-B6F1-D690-C36F-F64C0843FB00" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="nombre_album" id="ACA8619D-4ABB-F81B-F7BA-A216592A660A">
+<createdBy>Mario</createdBy>
+<createdTime>2023-02-27 22:12:12 UTC</createdTime>
+<ownerDesignName>DataModelerBase</ownerDesignName>
+<engineerTo>
+<item key="5D1CFFD0-B6F1-D690-C36F-F64C0843FB00" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_user" id="D76A22A8-EA42-2323-F593-ADA308C622A5">
+<createdBy>Mario</createdBy>
+<createdTime>2023-02-27 22:14:00 UTC</createdTime>
+<generatorID>228A4EE4-378B-E3F9-0F2D-E8EA9627EA13</generatorID>
+<ownerDesignName>DataModelerBase</ownerDesignName>
+<engineerTo>
+<item key="5D1CFFD0-B6F1-D690-C36F-F64C0843FB00" value="true"/>
+</engineerTo>
+<referedAttribute>324A780C-CF41-A484-C82E-8D522F869438</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="893674BD-515C-6E4D-FAE3-62608C3A42C9" name="Album PK">
+<createdBy>Mario</createdBy>
+<createdTime>2023-02-27 22:12:37 UTC</createdTime>
+<ownerDesignName>DataModelerBase</ownerDesignName>
+<engineerTo>
+<item key="5D1CFFD0-B6F1-D690-C36F-F64C0843FB00" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>8E20FBF1-2638-B944-A6DA-9FFF66F02EBF</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

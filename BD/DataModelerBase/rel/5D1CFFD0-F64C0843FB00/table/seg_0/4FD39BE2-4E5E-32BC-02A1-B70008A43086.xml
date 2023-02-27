@@ -1,0 +1,76 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="4FD39BE2-4E5E-32BC-02A1-B70008A43086" name="Album">
+<createdBy>Mario</createdBy>
+<createdTime>2023-02-27 22:14:35 UTC</createdTime>
+<generatorID>4E0F430F-AF81-8398-39D4-E0A708E97C06</generatorID>
+<ownerDesignName>DataModelerBase</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_album" id="188C7F6A-9CEB-984A-696E-0EB4EB9A4175">
+<createdBy>Mario</createdBy>
+<createdTime>2023-02-27 22:14:35 UTC</createdTime>
+<generatorID>8E20FBF1-2638-B944-A6DA-9FFF66F02EBF</generatorID>
+<ownerDesignName>DataModelerBase</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nombre_album" id="57B938D3-074B-AD30-C189-D2B4D48CE867">
+<createdBy>Mario</createdBy>
+<createdTime>2023-02-27 22:14:35 UTC</createdTime>
+<generatorID>ACA8619D-4ABB-F81B-F7BA-A216592A660A</generatorID>
+<ownerDesignName>DataModelerBase</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="id_user" id="60578EC0-A438-6111-EAA8-D517D3BF1F02">
+<createdBy>Mario</createdBy>
+<createdTime>2023-02-27 22:14:35 UTC</createdTime>
+<generatorID>D76A22A8-EA42-2323-F593-ADA308C622A5</generatorID>
+<ownerDesignName>DataModelerBase</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="6017AD3D-596D-6DE9-D4D4-12CCBD54A402" referredColumn="E2439559-04AE-FB64-FC75-67E73E2CDD14"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="92F64124-8B37-2FB4-4AC1-270EFF769614" name="Album_PK">
+<createdBy>Mario</createdBy>
+<createdTime>2023-02-27 22:14:35 UTC</createdTime>
+<generatorID>893674BD-515C-6E4D-FAE3-62608C3A42C9</generatorID>
+<ownerDesignName>DataModelerBase</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="188C7F6A-9CEB-984A-696E-0EB4EB9A4175"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="4087EDDC-3783-51CA-0DC0-402922B929B1" name="Album_Usuarios_FK">
+<createdBy>Mario</createdBy>
+<createdTime>2023-02-27 22:14:35 UTC</createdTime>
+<generatorID>228A4EE4-378B-E3F9-0F2D-E8EA9627EA13</generatorID>
+<ownerDesignName>DataModelerBase</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="60578EC0-A438-6111-EAA8-D517D3BF1F02"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

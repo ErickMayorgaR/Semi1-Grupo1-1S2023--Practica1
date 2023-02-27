@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="id_allbum" directorySegmentName="seg_0" id="6BE2D284-1493-BA74-F25A-1002AB122134">
+<createdBy>Mario</createdBy>
+<createdTime>2023-02-27 22:14:09 UTC</createdTime>
+<ownerDesignName>DataModelerBase</ownerDesignName>
+<engineerTo>
+<item key="5D1CFFD0-B6F1-D690-C36F-F64C0843FB00" value="true"/>
+</engineerTo>
+<sourcePk>893674BD-515C-6E4D-FAE3-62608C3A42C9</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>4E0F430F-AF81-8398-39D4-E0A708E97C06</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>8DB62B84-D5E7-917D-0F82-0C010F59E919</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

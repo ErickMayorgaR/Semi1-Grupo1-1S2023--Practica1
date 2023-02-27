@@ -1,0 +1,89 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="0AA319E9-9051-CFBC-B89A-016C24983D1A" name="Usuarios">
+<createdBy>Mario</createdBy>
+<createdTime>2023-02-27 22:14:35 UTC</createdTime>
+<generatorID>D9D78DB3-C766-C2D0-8989-32EEABDCC52F</generatorID>
+<ownerDesignName>DataModelerBase</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_user" id="E2439559-04AE-FB64-FC75-67E73E2CDD14">
+<createdBy>Mario</createdBy>
+<createdTime>2023-02-27 22:14:35 UTC</createdTime>
+<generatorID>324A780C-CF41-A484-C82E-8D522F869438</generatorID>
+<ownerDesignName>DataModelerBase</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="usuario" id="11A3A209-6AB0-60E5-C198-DA38D55533DB">
+<createdBy>Mario</createdBy>
+<createdTime>2023-02-27 22:14:35 UTC</createdTime>
+<generatorID>0A95490E-5C5A-8796-6715-922654BD6BB3</generatorID>
+<ownerDesignName>DataModelerBase</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nombre" id="75D3EE4A-B120-8555-222D-E28A31A5E7D0">
+<createdBy>Mario</createdBy>
+<createdTime>2023-02-27 22:14:35 UTC</createdTime>
+<generatorID>13C11905-C4B1-DA82-113C-D2E6F23BB3E8</generatorID>
+<ownerDesignName>DataModelerBase</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>150</dataTypeSize>
+<ownDataTypeParameters>150,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="contra" id="348C5EC8-5064-56B6-724A-CFA17095E0FE">
+<createdBy>Mario</createdBy>
+<createdTime>2023-02-27 22:14:35 UTC</createdTime>
+<generatorID>40305248-429E-BA51-3BCE-AEDAE6E1D9FC</generatorID>
+<ownerDesignName>DataModelerBase</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>150</dataTypeSize>
+<ownDataTypeParameters>150,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="foto" id="D3C43665-CBF7-2D09-B226-6454F7B0DB42">
+<createdBy>Mario</createdBy>
+<createdTime>2023-02-27 22:14:35 UTC</createdTime>
+<generatorID>6B0B50FA-EC2C-8AC5-2324-25C079A56745</generatorID>
+<ownerDesignName>DataModelerBase</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>2500</dataTypeSize>
+<ownDataTypeParameters>2500,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="6AE4D319-788F-5895-AC79-83DE0C6E5A11" name="Usuarios_PK">
+<createdBy>Mario</createdBy>
+<createdTime>2023-02-27 22:14:35 UTC</createdTime>
+<generatorID>D49EB7E4-BAC9-F0C6-E931-DBADD328EF63</generatorID>
+<ownerDesignName>DataModelerBase</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="E2439559-04AE-FB64-FC75-67E73E2CDD14"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
