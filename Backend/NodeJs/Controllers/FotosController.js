@@ -1,5 +1,7 @@
 const { application, response } = require('express');
 const pool = require('../exec');
+const { v4: uuidv4 } = require('uuid');
+const bucket = require('../Bucket/bucket');
 
 
 //GESTIONES PARA FOTOS
@@ -16,7 +18,10 @@ async function getFoto(req, res){
 
 async function CreateFoto(req, res){
   try{
-    const params = [req.body.foto,req.body.id_album]
+    const uuid = uuidv4().toString();
+    bucket.uploadFile(2,uuid,req.body.foto)
+    let ruta = "https://bucket-albumes-semi1practica1g1.s3.amazonaws.com/Fotos_Publicadas/" + uuid
+    const params = [ruta,req.body.id_album]
     await pool.execute_sp('CrearFoto',params)
     return res.status(200).json({ mensaje: "Foto ingresado exitosamente."});
   }catch(e){
@@ -36,9 +41,18 @@ async function DeleteFoto(req, res){
 
 async function UpdateFoto(req, res){
   try{
-    const params = [req.body.id_foto, req.body.foto,req.body.id_album]
+    //Eliminar foto anterior
+    const params2 = [req.body.id_foto]
+    const respuesta = await pool.execute_sp('SelectFotosEspecifico',params2)
+    let rutasuid = respuesta.foto.split("/");
+    let uidant = rutasuid[(rutasuid.length)-1]
+    bucket.updateFile(2,uidant, req.body.foto)
+    //Cambiar Foto    
+    bucket.uploadFile(2,uidant,req.body.foto)
+  
+    const params = [req.body.id_foto, respuesta.foto,req.body.id_album]
     await pool.execute_sp('ModificarFoto',params)
-    return res.status(200).json({ mensaje: "Foto modificado exitosamente."});
+    return res.status(200).json({ mensaje: "Foto modificada exitosamente."});
   }catch(e){
     return res.status(200).json({ e });
   }

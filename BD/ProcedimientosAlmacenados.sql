@@ -130,3 +130,25 @@ begin
 end $$
 
 
+-- CONSULTA 13 SELECT PARA USUARIOS ESPECIFICOS
+DROP PROCEDURE IF EXISTS SelectUsuariosEspecifico;
+DELIMITER $$
+CREATE PROCEDURE SelectUsuariosEspecifico(in v_id_user INTEGER)
+begin
+	SELECT *
+    FROM Usuarios
+    WHERE id_user=v_id_user;
+end $$
+
+
+-- CONSULTA 14 SELECT PARA FOTOS ESPECIFICAS
+DROP PROCEDURE IF EXISTS SelectFotosEspecifico;
+DELIMITER $$
+CREATE PROCEDURE SelectFotosEspecifico(in v_id_foto INTEGER)
+begin
+	SELECT *
+    FROM Fotos
+    WHERE id_foto=v_id_foto;
+end $$
+
+
