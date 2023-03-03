@@ -19,23 +19,36 @@ async function getUsuarios(req, res){
 
 async function CreateUsuarios(req, res){
   try{
-    req.body.contra = SHA256(req.body.contra).toString();
-    const uuid = uuidv4().toString();
-    let ruta = "https://bucket-albumes-semi1practica1g1.s3.amazonaws.com/Fotos_Perfil/" + uuid
-    bucket.uploadFile(1,uuid,req.body.foto)
-
-    //Mandar a base de datos la data procesada
-    const params = [req.body.usuario,req.body.nombre, req.body.contra, ruta]
-    await pool.execute_sp('CrearUsuario',params)
-    return res.status(200).json({ mensaje: "Usuario ingresado exitosamente."});
+    if(res.body.contra === res.body.contra2){
+      req.body.contra = SHA256(req.body.contra).toString();
+      const uuid = uuidv4().toString();
+      let ruta = "https://bucket-albumes-semi1practica1g1.s3.amazonaws.com/Fotos_Perfil/" + uuid
+      bucket.uploadFile(1,uuid,req.body.foto)
+  
+      //Mandar a base de datos la data procesada
+      const params = [req.body.usuario,req.body.nombre, req.body.contra, ruta]
+      await pool.execute_sp('CrearUsuario',params)
+      return res.status(200).json({ mensaje: "Usuario ingresado exitosamente."});
+    }else{
+      return res.status(400).json({ mensaje: "Las contraseñas no coinciden." });
+    }
   }catch(e){
-    return res.status(200).json({ e });
+    return res.status(400).json({ e });
   }
 }
 
 async function DeleteUsuarios(req, res){
   try{
+    //AQUI RECUPERA LA DATA DEL USUARIO QUE SE QUIERE ELIMINAR PARA ELIMINAR LA FOTO DE LA RUTA DEL S3
     const params = [req.body.id_user]
+    let respuesta = await pool.execute_sp('SelectUsuariosEspecifico',params)
+    let rutasuid = respuesta.foto.split("/");
+    let uidant = rutasuid[(rutasuid.length)-1]
+    //AQUI SE MANDA A ELIMINAR LA IMAGEN DEL USUARIO
+    bucket.DeleteFile(1, uidant)
+    //Aqui mandar e hacer el proceso de eliminacion  de albumnes y fotos del  usuario
+
+    //Ingreso  de eliminacion de base de datos de usuario
     await pool.execute_sp('EliminarUsuario',params)
     return res.status(200).json({ mensaje: "Usuario eliminado exitosamente."});
   }catch(e){

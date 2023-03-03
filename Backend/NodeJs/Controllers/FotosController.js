@@ -31,12 +31,32 @@ async function CreateFoto(req, res){
 
 async function DeleteFoto(req, res){
   try{
+    //Recuperacion de foto a eliminar
     const params = [req.body.id_foto]
+    let respuesta = await pool.execute_sp('SelectFotosEspecifico',params)
+    let rutasuid = respuesta.foto.split("/");
+    let uidant = rutasuid[(rutasuid.length)-1]
+    //AQUI SE MANDA A ELIMINAR LA IMAGEN DEL USUARIO
+    bucket.DeleteFile(2, uidant)
+    //Eliminar registro de la base de datos
     await pool.execute_sp('EliminarFoto',params)
     return res.status(200).json({ mensaje: "Foto eliminado exitosamente."});
   }catch(e){
     return res.status(200).json({ e });
   }
+}
+
+async function ElimnarMuchasFotos(id_foto){
+
+    //Recuperacion de foto a eliminar
+    const params = [id_foto]
+    let respuesta = await pool.execute_sp('SelectFotosEspecifico',params)
+    let rutasuid = respuesta.foto.split("/");
+    let uidant = rutasuid[(rutasuid.length)-1]
+    //AQUI SE MANDA A ELIMINAR LA IMAGEN DEL USUARIO
+    bucket.DeleteFile(2, uidant)
+    //Eliminar registro de la base de datos
+    await pool.execute_sp('EliminarFoto',params)
 }
 
 async function UpdateFoto(req, res){
@@ -46,9 +66,8 @@ async function UpdateFoto(req, res){
     const respuesta = await pool.execute_sp('SelectFotosEspecifico',params2)
     let rutasuid = respuesta.foto.split("/");
     let uidant = rutasuid[(rutasuid.length)-1]
-    bucket.updateFile(2,uidant, req.body.foto)
     //Cambiar Foto    
-    bucket.uploadFile(2,uidant,req.body.foto)
+    bucket.updateFile(2,uidant,req.body.foto)
   
     const params = [req.body.id_foto, respuesta.foto,req.body.id_album]
     await pool.execute_sp('ModificarFoto',params)
@@ -66,6 +85,7 @@ module.exports = {
   getFoto,
   CreateFoto,
   DeleteFoto,
-  UpdateFoto
+  UpdateFoto,
+  ElimnarMuchasFotos
 };
 

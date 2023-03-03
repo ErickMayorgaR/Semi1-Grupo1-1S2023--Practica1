@@ -151,4 +151,12 @@ begin
     WHERE id_foto=v_id_foto;
 end $$
 
-
+-- CONSULTA 15 SELECT PARA FOTOS RELACIONADAS A UN ALBUM ESPECIFICO
+DROP PROCEDURE IF EXISTS SelectFotosAlbum;
+DELIMITER $$
+CREATE PROCEDURE SelectFotosAlbum(in v_id_album INTEGER)
+begin
+	SELECT *
+    FROM Fotos
+    WHERE id_album=v_id_album;
+end $$

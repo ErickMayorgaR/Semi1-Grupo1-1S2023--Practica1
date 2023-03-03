@@ -1,5 +1,6 @@
 const { application, response } = require('express');
 const pool = require('../exec');
+import fotos from './FotosController';
 
 
 //GESTIONES PARA ALBUMES
@@ -26,7 +27,14 @@ async function CreateAlbum(req, res){
 
 async function DeleteAlbum(req, res){
   try{
+    //Recuperacion  de  fotos relacionadas con el album
     const params = [req.body.id_album]
+    let respuesta = await pool.execute_sp('SelectFotosAlbum',params)
+    console.log(respuesta.length)
+    for(let i =0;i<respuesta.length;i++){
+      fotos.ElimnarMuchasFotos(respuesta.id_foto)
+    }
+    //Eliminacion de base de datos de album
     await pool.execute_sp('EliminarAlbum',params)
     return res.status(200).json({ mensaje: "Album eliminado exitosamente."});
   }catch(e){
