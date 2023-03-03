@@ -3,6 +3,7 @@ const bucket = require('../Bucket/bucket');
 const pool = require('../exec');
 var SHA256 = require("crypto-js/sha256");
 const { v4: uuidv4 } = require('uuid');
+const albumes =  require('./AlbumesController')
 
 
 //GESTIONES PARA USUARIOS
@@ -19,7 +20,7 @@ async function getUsuarios(req, res){
 
 async function CreateUsuarios(req, res){
   try{
-    if(res.body.contra === res.body.contra2){
+    if(req.body.contra === req.body.contra2){
       req.body.contra = SHA256(req.body.contra).toString();
       const uuid = uuidv4().toString();
       let ruta = "https://bucket-albumes-semi1practica1g1.s3.amazonaws.com/Fotos_Perfil/" + uuid
@@ -42,12 +43,16 @@ async function DeleteUsuarios(req, res){
     //AQUI RECUPERA LA DATA DEL USUARIO QUE SE QUIERE ELIMINAR PARA ELIMINAR LA FOTO DE LA RUTA DEL S3
     const params = [req.body.id_user]
     let respuesta = await pool.execute_sp('SelectUsuariosEspecifico',params)
-    let rutasuid = respuesta.foto.split("/");
+    let rutasuid = respuesta.result[0][0].foto.split("/");
     let uidant = rutasuid[(rutasuid.length)-1]
     //AQUI SE MANDA A ELIMINAR LA IMAGEN DEL USUARIO
     bucket.DeleteFile(1, uidant)
     //Aqui mandar e hacer el proceso de eliminacion  de albumnes y fotos del  usuario
-
+    let respuesta2 = await pool.execute_sp('SelectAlbumesUser',params)
+    console.log(respuesta2.result[0])
+    for(let i =0;i<respuesta2.result[0].length;i++){
+      albumes.ElimnarMuchosAlbumnes(respuesta2.result[0][i].id_album)
+    }
     //Ingreso  de eliminacion de base de datos de usuario
     await pool.execute_sp('EliminarUsuario',params)
     return res.status(200).json({ mensaje: "Usuario eliminado exitosamente."});

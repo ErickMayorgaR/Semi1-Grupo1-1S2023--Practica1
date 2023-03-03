@@ -34,8 +34,9 @@ async function DeleteFoto(req, res){
     //Recuperacion de foto a eliminar
     const params = [req.body.id_foto]
     let respuesta = await pool.execute_sp('SelectFotosEspecifico',params)
-    let rutasuid = respuesta.foto.split("/");
+    let rutasuid = respuesta.result[0][0].foto.split("/");
     let uidant = rutasuid[(rutasuid.length)-1]
+    console.log(uidant)
     //AQUI SE MANDA A ELIMINAR LA IMAGEN DEL USUARIO
     bucket.DeleteFile(2, uidant)
     //Eliminar registro de la base de datos
@@ -47,16 +48,19 @@ async function DeleteFoto(req, res){
 }
 
 async function ElimnarMuchasFotos(id_foto){
-
+  try{
     //Recuperacion de foto a eliminar
     const params = [id_foto]
     let respuesta = await pool.execute_sp('SelectFotosEspecifico',params)
-    let rutasuid = respuesta.foto.split("/");
+    let rutasuid = respuesta.result[0][0].foto.split("/");
     let uidant = rutasuid[(rutasuid.length)-1]
     //AQUI SE MANDA A ELIMINAR LA IMAGEN DEL USUARIO
     bucket.DeleteFile(2, uidant)
     //Eliminar registro de la base de datos
     await pool.execute_sp('EliminarFoto',params)
+  }catch(e){
+    console.log("Se produjo un error en Eliminar Muchas Fotos")
+  }
 }
 
 async function UpdateFoto(req, res){
@@ -64,7 +68,7 @@ async function UpdateFoto(req, res){
     //Eliminar foto anterior
     const params2 = [req.body.id_foto]
     const respuesta = await pool.execute_sp('SelectFotosEspecifico',params2)
-    let rutasuid = respuesta.foto.split("/");
+    let rutasuid = respuesta.result[0][0].foto.split("/");
     let uidant = rutasuid[(rutasuid.length)-1]
     //Cambiar Foto    
     bucket.updateFile(2,uidant,req.body.foto)

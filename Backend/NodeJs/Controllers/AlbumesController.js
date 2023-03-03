@@ -1,6 +1,6 @@
 const { application, response } = require('express');
 const pool = require('../exec');
-import fotos from './FotosController';
+const fotos = require('./FotosController');
 
 
 //GESTIONES PARA ALBUMES
@@ -30,15 +30,30 @@ async function DeleteAlbum(req, res){
     //Recuperacion  de  fotos relacionadas con el album
     const params = [req.body.id_album]
     let respuesta = await pool.execute_sp('SelectFotosAlbum',params)
-    console.log(respuesta.length)
-    for(let i =0;i<respuesta.length;i++){
-      fotos.ElimnarMuchasFotos(respuesta.id_foto)
+    console.log(respuesta.result[0])
+    for(let i =0;i<respuesta.result[0].length;i++){
+      fotos.ElimnarMuchasFotos(respuesta.result[0][i].id_foto)
     }
     //Eliminacion de base de datos de album
     await pool.execute_sp('EliminarAlbum',params)
     return res.status(200).json({ mensaje: "Album eliminado exitosamente."});
   }catch(e){
     return res.status(200).json({ e });
+  }
+}
+
+async function ElimnarMuchosAlbumnes(id_album){
+  try{
+    const params = [id_album]
+    let respuesta = await pool.execute_sp('SelectFotosAlbum',params)
+    console.log(respuesta.result[0])
+    for(let i =0;i<respuesta.result[0].length;i++){
+      fotos.ElimnarMuchasFotos(respuesta.result[0][i].id_foto)
+    }
+    //Eliminacion de base de datos de album
+    await pool.execute_sp('EliminarAlbum',params)
+  }catch(e){
+    console.log("Se produjo un error en Eliminar Muchos Albumes")
   }
 }
 
@@ -60,6 +75,7 @@ module.exports = {
   getAlbum,
   CreateAlbum,
   DeleteAlbum,
-  UpdateAlbum
+  UpdateAlbum,
+  ElimnarMuchosAlbumnes
 };
 
