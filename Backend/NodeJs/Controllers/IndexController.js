@@ -34,6 +34,7 @@ async function CreateUsuarios(req, res){
       return res.status(400).json({ mensaje: "Las contraseñas no coinciden." });
     }
   }catch(e){
+    console.log(e)
     return res.status(400).json({ e });
   }
 }
