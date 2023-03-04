@@ -1,0 +1,95 @@
+.formClass {
+    background-color: #02c39a;
+  }
+.nombre-album {
+    position: absolute;
+    left: 500px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translateY(10%);
+}
+
+.info {
+    position: absolute;
+    left: 500px;
+    width: 470px;
+    height: 100px;
+    object-fit: cover;
+    transform: translateY(170%);
+}
+
+.info2 {
+    position: absolute;
+    left: 500px;
+    width: 470px;
+    height: 100px;
+    object-fit: cover;
+    transform: translateY(170%);
+}
+
+.agregar{
+    position: absolute;
+    top: 0;
+    left: 500px;
+    width: 150px;
+    height: 50px;
+    object-fit: cover;
+    transform: translateX(150%);
+    transform: translateY(500%);  
+}
+
+.mostrar{
+    position: absolute;
+    top: 0;
+    left: 500px;
+    width: 250px;
+    height: 50px;
+    object-fit: cover;
+    transform: translateX(150%);
+    transform: translateY(800%);  
+}
+
+.modificar{
+    position: absolute;
+    top: 0;
+    left: 660px;
+    width: 150px;
+    height: 50px;
+    object-fit: cover;
+    transform: translateX(150%);
+    transform: translateY(500%);  
+}
+
+.cancelar{
+    position: absolute;
+    top: 0;
+    left: 820px;
+    width: 150px;
+    height: 50px;
+    object-fit: cover;
+    transform: translateX(150%);
+    transform: translateY(500%);  
+}
+
+.box{
+    position: absolute;
+    top: 0;
+    left: 500px;
+    width: 250px;
+    height: 50px;
+    object-fit: cover;
+    transform: translateX(150%);
+    transform: translateY(700%); 
+    background-color: #264653;
+    border-radius: 4px;
+    color: #333;
+    font-size: 16px;
+    padding: 10px;
+    width: 200px;
+}
+
+.image-upload{
+    left: 300px;
+    width: 300px;   
+}

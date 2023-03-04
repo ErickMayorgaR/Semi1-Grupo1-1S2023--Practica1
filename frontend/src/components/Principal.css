@@ -1,0 +1,221 @@
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fcbf49;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  }
+  .containera {
+    background-color: #02c39a;
+    height: 100vh;
+  }
+
+  .title {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 10px;
+}
+
+.subtitle {
+    text-align: center;
+}
+
+.image {
+    margin-left: 10px;
+}
+
+
+
+  .contanierImage{
+    position: absolute;
+    background-color: #02c39a;
+    left: 80px;
+    width: 12%;
+    height: 3%;
+    transform: translateY(-1000%);
+  }
+
+  .container3 {
+    position: absolute;
+    background-color: #02c39a;
+    left: 160px;
+    width: 12%;
+    height: 3%;
+    transform: translateY(-1500%);
+  }
+  div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+  
+  label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #003049;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0069d9;
+  }
+
+  .preview-container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+  }
+  
+  .preview-image {
+    position: absolute;
+    top: 0;
+    left: -300px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translateX(-50%);
+    transform: translateY(-220%);
+}
+
+.container2 {
+    position: absolute;
+    left: 60px;
+    width: 12%;
+    height: 3%;
+    transform: translateY(620%);
+  }
+.preview-description {
+    position: absolute;
+    left: -50px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translateY(10%);
+}
+
+.preview-description3 {
+    position: absolute;
+    left: 120px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translateY(52%);
+}
+
+
+.preview-description4 {
+    position: absolute;
+    left: 120px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translateY(60%);
+}
+
+.position-choose-file {
+    transform: translateX(-50%);
+    transform: translateY(-120%);
+    
+}
+h1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+
+
+  .preview-container {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+    height: 300px;
+  }
+  
+  .preview-image {
+    position: absolute;
+    top: 0;
+    left: -300px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translateX(-50%);
+    transform: translateY(-220%);
+}
+
+.container-button{
+    position: absolute;
+    top: 0;
+    left: 130px;
+    width: 150px;
+    height: 50px;
+    object-fit: cover;
+    transform: translateX(150%);
+    transform: translateY(1000%);  
+}
+
+.container-button-upload{
+    position: absolute;
+    top: 0;
+    left: 700px;
+    width: 150px;
+    height: 50px;
+    object-fit: cover;
+    transform: translateX(150%);
+    transform: translateY(1000%);  
+}
+
+.container-button-editAlbum{
+    position: absolute;
+    top: 0;
+    left: 1100px;
+    width: 250px;
+    height: 50px;
+    object-fit: cover;
+    transform: translateX(150%);
+    transform: translateY(1000%);  
+}
+
+.container-button-logout{
+    position: absolute;
+    top: 0;
+    left: 1100px;
+    width: 250px;
+    height: 50px;
+    object-fit: cover;
+    transform: translateX(150%);
+    transform: translateY(800%);  
+}
+
+.container-button-editProfile{
+    position: absolute;
+    top: 0;
+    left: 700px;
+    width: 150px;
+    height: 50px;
+    object-fit: cover;
+    transform: translateX(150%);
+    transform: translateY(800%);  
+}

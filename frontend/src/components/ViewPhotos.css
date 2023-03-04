@@ -1,0 +1,55 @@
+.siguiente{
+    position: absolute;
+    top: 0;
+    left: 920px;
+    width: 150px;
+    height: 50px;
+    object-fit: cover;
+    transform: translateX(150%);
+    transform: translateY(500%);  
+}
+
+.anterior{
+    position: absolute;
+    top: 0;
+    left: 220px;
+    width: 150px;
+    height: 50px;
+    object-fit: cover;
+    transform: translateX(150%);
+    transform: translateY(500%);  
+}
+
+.box2{
+    position: absolute;
+    top: 0;
+    left: 500px;
+    width: 450px;
+    height: 50px;
+    object-fit: cover;
+    transform: translateX(150%);
+    transform: translateY(800%); 
+    background-color: #264653;
+    border-radius: 4px;
+    color: #ffffff;
+    font-size: 16px;
+    padding: 10px;
+    width: 200px;
+}
+
+.collection-images{
+    position: absolute;
+    top: 0;
+    left: 500px;
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+    transform: translateX(150%);
+    transform: translateY(10%); 
+    background-color: #264653;
+    border-radius: 4px;
+    color: #ffffff;
+    font-size: 16px;
+    padding: 10px;
+    width: 200px;
+}
