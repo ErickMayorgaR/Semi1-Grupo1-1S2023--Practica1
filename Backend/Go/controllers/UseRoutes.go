@@ -6,6 +6,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strconv"
+	"strings"
 
 	"github.com/google/uuid"
 )
@@ -141,7 +143,7 @@ func CreateUsuarios(w http.ResponseWriter, r *http.Request) {
 
 func CreateAlbum(w http.ResponseWriter, r *http.Request) {
 	decoder := json.NewDecoder(r.Body)
-	var data map[string]string
+	var data map[string]interface{}
 	err1 := decoder.Decode(&data)
 
 	if err1 != nil {
@@ -150,8 +152,8 @@ func CreateAlbum(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var params []string
-	params = append(params, data["nombre_album"])
-	params = append(params, data["id_user"])
+	params = append(params, data["nombre_album"].(string))
+	params = append(params, strconv.FormatFloat(data["id_user"].(float64), 'f', -1, 64))
 
 	_, err := Execute_sp("CrearAlbum", params)
 	if err != nil {
@@ -197,8 +199,65 @@ func CreateFoto(w http.ResponseWriter, r *http.Request) {
 //DELETE-------------------------------------
 
 func DeleteUsuario(w http.ResponseWriter, r *http.Request) {
+	// decoder := json.NewDecoder(r.Body)
+	// var data map[string]interface{}
+	// err1 := decoder.Decode(&data)
+
+	// if err1 != nil {
+	// 	http.Error(w, err1.Error(), http.StatusBadRequest)
+	// 	return
+	// }
+
+	// // AQUI RECUPERA LA DATA DEL USUARIO QUE SE QUIERE ELIMINAR PARA ELIMINAR LA FOTO DE LA RUTA DEL S3
+	// respuesta, err := Execute_sp("SelectUsuariosEspecifico", []string{strconv.FormatFloat(data["id_user"].(float64), 'f', -1, 64)})
+	// // if err != nil {
+	// // 	http.Error(w, err.Error(), http.StatusBadRequest)
+	// // 	return
+	// // }
+
+	// rutafoto := string(respuesta[0]["foto"].([]byte))
+	// //strings.Split(respuesta[0]["foto"].(string), "/")
+
+	// //uidant := rutauid[len(rutauid)-1]
+	// //fmt.Print(uidant)
+	// fmt.Print(rutafoto)
+
+	// respuesta2, err2 := Execute_sp("SelectAlbumesUser", []string{strconv.FormatFloat(data["id_user"].(float64), 'f', -1, 64)})
+	// if err2 != nil {
+	// 	http.Error(w, err.Error(), http.StatusBadRequest)
+	// 	return
+	// }
+	// fmt.Print(respuesta, respuesta2)
+	// // rutasuid := strings.Split(respuesta.Result[0][0]["foto"].(string), "/")
+	// // uidant := rutasuid[len(rutasuid)-1]
+	// // // AQUI SE MANDA A ELIMINAR LA IMAGEN DEL USUARIO
+	// // bucket.DeleteFile(1, uidant)
+	// // // Aqui mandar e hacer el proceso de eliminacion  de albumnes y fotos del  usuario
+	// // respuesta2, err := pool.ExecuteSP("SelectAlbumesUser", params...)
+	// // if err != nil {
+	// // 	http.Error(res, err.Error(), http.StatusInternalServerError)
+	// // 	return
+	// // }
+	// // fmt.Println(respuesta2.Result[0])
+	// // for i := 0; i < len(respuesta2.Result[0]); i++ {
+	// // 	albumes.ElimnarMuchosAlbumnes(respuesta2.Result[0][i]["id_album"].(int))
+	// // }
+	// // // Ingreso  de eliminacion de base de datos de usuario
+	// // _, err = pool.ExecuteSP("EliminarUsuario", params...)
+	// // if err != nil {
+	// // 	http.Error(res, err.Error(), http.StatusInternalServerError)
+	// // 	return
+	// // }
+
+	// // Respuesta exitosa
+	// w.Header().Set("Content-Type", "application/json")
+	// w.WriteHeader(http.StatusOK)
+	// w.Write([]byte(`{"mensaje":"Foto ingresado exitosamente."}`))
+}
+
+func DeleteAlbum(w http.ResponseWriter, r *http.Request) {
 	decoder := json.NewDecoder(r.Body)
-	var data map[string]string
+	var data map[string]interface{}
 	err1 := decoder.Decode(&data)
 
 	if err1 != nil {
@@ -206,57 +265,101 @@ func DeleteUsuario(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	params := []string{strconv.FormatFloat(data["id_album"].(float64), 'f', -1, 64)}
+
 	// AQUI RECUPERA LA DATA DEL USUARIO QUE SE QUIERE ELIMINAR PARA ELIMINAR LA FOTO DE LA RUTA DEL S3
-	respuesta, err := Execute_sp("SelectUsuariosEspecifico", []string{data["id_user"]})
+	respuesta, err := Execute_sp("SelectFotosAlbum", params)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	fmt.Print(respuesta)
-	// rutasuid := strings.Split(respuesta.Result[0][0]["foto"].(string), "/")
-	// uidant := rutasuid[len(rutasuid)-1]
-	// // AQUI SE MANDA A ELIMINAR LA IMAGEN DEL USUARIO
-	// bucket.DeleteFile(1, uidant)
-	// // Aqui mandar e hacer el proceso de eliminacion  de albumnes y fotos del  usuario
-	// respuesta2, err := pool.ExecuteSP("SelectAlbumesUser", params...)
-	// if err != nil {
-	// 	http.Error(res, err.Error(), http.StatusInternalServerError)
-	// 	return
-	// }
-	// fmt.Println(respuesta2.Result[0])
-	// for i := 0; i < len(respuesta2.Result[0]); i++ {
-	// 	albumes.ElimnarMuchosAlbumnes(respuesta2.Result[0][i]["id_album"].(int))
-	// }
-	// // Ingreso  de eliminacion de base de datos de usuario
-	// _, err = pool.ExecuteSP("EliminarUsuario", params...)
-	// if err != nil {
-	// 	http.Error(res, err.Error(), http.StatusInternalServerError)
-	// 	return
-	// }
+
+	//itera sobre todas las fotos del album
+	for i := 0; i < len(respuesta[0]); i++ {
+		eliminarFoto(string(respuesta[0]["id_foto"].([]byte)))
+		fmt.Println(string(respuesta[0]["id_foto"].([]byte)))
+	}
+
+	respuesta2, err2 := Execute_sp("EliminarAlbum", params)
+	if err2 != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	fmt.Print(respuesta, respuesta2)
 
 	// Respuesta exitosa
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte(`{"mensaje":"Foto ingresado exitosamente."}`))
-}
 
-func DeleteAlbum(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
 }
 
 func DeleteFoto(w http.ResponseWriter, r *http.Request) {
+	decoder := json.NewDecoder(r.Body)
+	var data map[string]interface{}
+	err1 := decoder.Decode(&data)
+
+	if err1 != nil {
+		http.Error(w, err1.Error(), http.StatusBadRequest)
+		return
+	}
+
+	idFoto := strconv.FormatFloat(data["id_foto"].(float64), 'f', -1, 64)
+	eliminarFoto(idFoto)
+
+	// Respuesta exitosa
 	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte(`{"mensaje":"Foto ingresado exitosamente."}`))
+
 }
 
 // UPDATES--------------------------------------
 
-func Updateusuarios(w http.ResponseWriter, r *http.Request) {
+func UpdateUsuario(w http.ResponseWriter, r *http.Request) {
+	decoder := json.NewDecoder(r.Body)
+	var data map[string]interface{}
+	err1 := decoder.Decode(&data)
+
+	if err1 != nil {
+		http.Error(w, err1.Error(), http.StatusBadRequest)
+		return
+	}
+
+	params2 := []string{strconv.FormatFloat(data["id_user"].(float64), 'f', -1, 64)}
+
+	respuesta, err := Execute_sp("SelectUsuariosEspecifico", params2)
+	if err != nil {
+		panic(err)
+	}
+
+	rutafoto := string(respuesta[0]["foto"].([]byte))
+	fmt.Print(data["usuario"].(string), data["nombre"].(string))
+	rutauid := strings.Split(rutafoto, "/")
+	uidant := rutauid[len(rutauid)-1]
+
+	UpdateFile(1, uidant, data["foto"].(string))
+	contra := fmt.Sprintf("%x", sha256.Sum256([]byte(data["contra"].(string))))
+	UploadFile(1, uidant, data["foto"].(string))
+
+	params := []string{strconv.FormatFloat(data["id_user"].(float64), 'f', -1, 64), data["usuario"].(string), data["nombre"].(string), contra,
+		string(respuesta[0]["foto"].([]byte))}
+
+	respuesta2, err2 := Execute_sp("ModificarUsuario", params)
+	if err2 != nil {
+		panic(err)
+	}
+	fmt.Print(respuesta2)
+	// Respuesta exitosa
 	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte(`{"mensaje":"Foto ingresado exitosamente."}`))
+
 }
 
 func UpdateAlbum(w http.ResponseWriter, r *http.Request) {
 	decoder := json.NewDecoder(r.Body)
-	var data map[string]string
+	var data map[string]interface{}
 	err1 := decoder.Decode(&data)
 
 	if err1 != nil {
@@ -265,7 +368,8 @@ func UpdateAlbum(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Mandar a base de datos la data procesada
-	_, err := Execute_sp("CrearFoto", []string{data["id_album"], data["nombre_album"], data["id_user"]})
+	_, err := Execute_sp("ModificarAlbum", []string{strconv.FormatFloat(data["id_album"].(float64), 'f', -1, 64),
+		data["nombre_album"].(string), strconv.FormatFloat(data["id_user"].(float64), 'f', -1, 64)})
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
@@ -278,7 +382,64 @@ func UpdateAlbum(w http.ResponseWriter, r *http.Request) {
 }
 
 func UpdateFoto(w http.ResponseWriter, r *http.Request) {
+	decoder := json.NewDecoder(r.Body)
+	var data map[string]interface{}
+	err1 := decoder.Decode(&data)
+
+	if err1 != nil {
+		http.Error(w, err1.Error(), http.StatusBadRequest)
+		return
+	}
+
+	params := []string{strconv.FormatFloat(data["id_foto"].(float64), 'f', -1, 64)}
+	respuesta, err := Execute_sp("SelectFotosEspecifico", params)
+	if err != nil {
+		panic(err)
+	}
+
+	rutafoto := string(respuesta[0]["foto"].([]byte))
+	rutauid := strings.Split(rutafoto, "/")
+	uidant := rutauid[len(rutauid)-1]
+
+	//llamar a funcion de amazon S3 Storage para actualizar el bucket
+	UpdateFile(2, uidant, data["foto"].(string))
+	//Eliminar registro de la base de datos
+	respuesta2, err2 := Execute_sp("ModificarFoto", []string{strconv.FormatFloat(data["id_foto"].(float64), 'f', -1, 64), string(respuesta[0]["foto"].([]byte)), strconv.FormatFloat(data["id_album"].(float64), 'f', -1, 64)})
+	if err2 != nil {
+		panic(err)
+	}
+
+	fmt.Print(respuesta2)
+
+	// Respuesta exitosa
 	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte(`{"mensaje":"Foto ingresado exitosamente."}`))
+}
+
+func eliminarFoto(id_foto string) {
+	params := []string{id_foto}
+
+	// AQUI RECUPERA LA DATA DEL USUARIO QUE SE QUIERE ELIMINAR PARA ELIMINAR LA FOTO DE LA RUTA DEL S3
+	respuesta, err := Execute_sp("SelectFotosEspecifico", params)
+	if err != nil {
+		panic(err)
+	}
+
+	rutafoto := string(respuesta[0]["foto"].([]byte))
+	rutauid := strings.Split(rutafoto, "/")
+	uidant := rutauid[len(rutauid)-1]
+	fmt.Print(uidant)
+	//llamar a funcion de amazon S3 Storage para borrar el bucket
+	DeleteFile(2, uidant)
+	//Eliminar registro de la base de datos
+	respuesta2, err2 := Execute_sp("EliminarFoto", params)
+	if err2 != nil {
+		panic(err)
+	}
+
+	fmt.Print(respuesta, respuesta2)
+	fmt.Println("Foto eliminada correctamente")
 }
 
 // func CreateUser(w http.ResponseWriter, r *http.Request) {

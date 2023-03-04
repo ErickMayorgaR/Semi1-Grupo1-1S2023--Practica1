@@ -112,7 +112,7 @@ func DeleteFile(fileType int, nombre string) {
 	fmt.Println(result)
 }
 
-func updateFile(fileType int, nombreAnterior string, nombre string) {
+func UpdateFile(fileType int, nombreAnterior string, nombre string) {
 	if err := godotenv.Load(); err != nil {
 		log.Fatalln(err)
 	}

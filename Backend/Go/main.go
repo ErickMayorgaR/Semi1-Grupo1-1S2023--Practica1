@@ -34,14 +34,14 @@ func main() {
 	router.HandleFunc("/api/CreateFoto", controllers.CreateFoto).Methods(http.MethodPost)
 
 	// // DELETE
-	router.HandleFunc("/api/deleteUsuario", controllers.DeleteUsuario).Methods(http.MethodDelete)
+	//router.HandleFunc("/api/deleteUsuario", controllers.DeleteUsuario).Methods(http.MethodDelete)
 	router.HandleFunc("/api/DeleteAlbum", controllers.DeleteAlbum).Methods(http.MethodDelete)
 	router.HandleFunc("/api/DeleteFoto", controllers.DeleteFoto).Methods(http.MethodDelete)
 
 	// //UPDATE
-	// router.HandleFunc("/api/updateUsuario", controllers.UpdateUsuario).Methods(http.MethodPost)
-	// router.HandleFunc("/api/UpdateAlbum", controllers.UpdateAlbum).Methods(http.MethodPost)
-	// router.HandleFunc("/api/UpdateFoto", controllers.UpdateFoto).Methods(http.MethodPost)
+	router.HandleFunc("/api/updateUsuario", controllers.UpdateUsuario).Methods(http.MethodPost)
+	router.HandleFunc("/api/UpdateAlbum", controllers.UpdateAlbum).Methods(http.MethodPost)
+	router.HandleFunc("/api/UpdateFoto", controllers.UpdateFoto).Methods(http.MethodPost)
 
 	log.Fatal(http.ListenAndServe(":5000", router))
 }
